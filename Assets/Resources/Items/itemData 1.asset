@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ccb3a66f83e66744939eff4f41a3481, type: 3}
+  m_Name: itemData 1
+  m_EditorClassIdentifier: 
+  _title: clothe 1
+  _description: this is a example clothe 1 description
+  _icon: {fileID: 165656140, guid: 6218dc462f070294ab08bbdd64c1ae14, type: 3}
+  _rarity: 1

@@ -5,17 +5,23 @@ namespace BGS.Apparence
 {
     public class ApparenceManager : MonoBehaviour
     {
-        [SerializeField] private SpriteRenderer _base;
-        private Dictionary<string, CustomApparence> _apparences = new Dictionary<string, CustomApparence>();
+        public static ApparenceManager Instance;
+
+        [SerializeField] private Transform _reference;
+        private Dictionary<ApparenceType, IApparenceApplicator> _apparences = new Dictionary<ApparenceType, IApparenceApplicator>();
+
+        private IApparenceBase _base;
 
         private void Awake()
         {
+            _base = _reference.GetComponent<IApparenceBase>();
+
             GetCustomApparences();
         }
 
         private void GetCustomApparences()
         {
-            foreach (CustomApparence apparence in _base.GetComponentsInChildren<CustomApparence>())
+            foreach (IApparenceApplicator apparence in _reference.GetComponentsInChildren<IApparenceApplicator>())
             {
                 _apparences.Add(apparence.Key, apparence);
             }
@@ -23,24 +29,21 @@ namespace BGS.Apparence
 
         private void Update()
         {
-            if (!_base) return;
+            if (_base == null) return;
 
-            string frameName = _base.sprite.name;
-            string frameIndex = frameName.Substring(frameName.LastIndexOf('_') + 1);
+            int frame = _base.GetCurrentFrame();
 
-            int frame = int.Parse(frameIndex);
-
-            foreach (CustomApparence apparence in _apparences.Values)
+            foreach (IApparenceApplicator apparence in _apparences.Values)
             {
                 apparence.SetFrame(frame);
             }
         }
 
-        public void UpdateApparence(string key, List<Sprite> frames)
+        public void UpdateApparence(ApparenceType key, List<Sprite> frames)
         {
             if (!_apparences.ContainsKey(key)) return;
 
-            _apparences[key].SetDecoration(frames);
+            _apparences[key].SetFrames(frames);
         }
     }
 }

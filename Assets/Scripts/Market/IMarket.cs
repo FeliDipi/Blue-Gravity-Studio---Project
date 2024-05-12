@@ -6,7 +6,7 @@ namespace BGS.Market
     {
         List<IMarketItem> Items { get; }
 
-        public void Purchase(IMarketItem item);
+        public bool Purchase(IMarketItem item);
     }
 }
 

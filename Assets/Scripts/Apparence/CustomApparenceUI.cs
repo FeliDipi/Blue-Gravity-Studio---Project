@@ -1,15 +1,16 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace BGS.Apparence
 {
-    public class CustomApparence : MonoBehaviour, IApparenceApplicator
+    public class CustomApparenceUI : MonoBehaviour, IApparenceApplicator
     {
         public ApparenceType Key => _type;
 
         public List<Sprite> Frames => _currentFrames;
 
-        [SerializeField] private SpriteRenderer _spr;
+        [SerializeField] private Image _img;
         [SerializeField] private ApparenceType _type;
 
         private List<Sprite> _currentFrames = new List<Sprite>();
@@ -18,11 +19,13 @@ namespace BGS.Apparence
         {
             if (_currentFrames.Count <= 0) return;
 
-            _spr.sprite = _currentFrames[frame];
+            _img.sprite = _currentFrames[frame];
         }
 
         public void SetFrames(List<Sprite> frames)
         {
+            _img.enabled = true;
+
             _currentFrames = frames;
         }
     }

@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ccb3a66f83e66744939eff4f41a3481, type: 3}
-  m_Name: itemData 2
+  m_Script: {fileID: 11500000, guid: 4c9a41a4a87de714fae0fa560e153b9d, type: 3}
+  m_Name: MarketItemData 6
   m_EditorClassIdentifier: 
-  _title: clothe 2
-  _description: this is a example clothe 2 description
-  _icon: {fileID: 738661157, guid: eb0f3d52f5acb7b46b6e47ff40b4d488, type: 3}
-  _rarity: 2
+  _itemData: {fileID: 11400000, guid: d01bd328b2329444daf18ea208378e59, type: 2}
+  _price: 200

@@ -2,28 +2,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MarketPreview : MonoBehaviour
+namespace BGS.Market
 {
-    [SerializeField] private List<ButtonEvent> _views = new List<ButtonEvent>();
-    [SerializeField] private Image _player;
-    [SerializeField] private Image _clothe;
-    [SerializeField] private Image _haircut;
-
-    private void Awake()
+    public class MarketPreview : MonoBehaviour
     {
-        SetupViews();
-    }
+        [SerializeField] private Image _player;
+        [SerializeField] private List<Sprite> _sides = new List<Sprite>();
 
-    private void SetupViews()
-    {
-        for(int i=0;i<_views.Count;i++)
+        public void SelectView(int side)
         {
-            _views[i].OnClick = () => SelectView(i);
+            if (side < 0 || side >= _sides.Count) return;
+
+            _player.sprite = _sides[side];
         }
     }
-
-    private void SelectView(int viewIndex) 
-    {
-
-    }
 }
+

@@ -22,11 +22,9 @@ namespace BGS.Interactuable
 
         private void Update()
         {
-            if (_currentInteractuable == null) return;
-
             if(Input.GetKeyDown(KeyCode.E))
             {
-                _currentInteractuable.Interact();
+                _currentInteractuable?.Interact();
             }
         }
 

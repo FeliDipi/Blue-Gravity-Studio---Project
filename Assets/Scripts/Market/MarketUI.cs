@@ -1,25 +1,30 @@
+using BGS.Apparence;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace BGS.Market
 {
     public class MarketUI : MonoBehaviour
     {
+        [Header("Preview Properties")]
+        [SerializeField] private ApparenceManager _previewApparence;
+
         [Header("Gallery Properties")]
         [SerializeField] private Transform _grid;
+        [SerializeField] private Transform _descriptionContent;
 
         [Header("Info Properties")]
         [SerializeField] private TMPro.TextMeshProUGUI _title;
         [SerializeField] private TMPro.TextMeshProUGUI _rarity;
         [SerializeField] private TMPro.TextMeshProUGUI _description;
         [SerializeField] private TMPro.TextMeshProUGUI _price;
-        [SerializeField] private ButtonEvent _purchaseBtn;
+        [SerializeField] private TMPro.TextMeshProUGUI _coins;
 
         private List<MarketCell> _cells = new List<MarketCell>();
         private Market _market;
 
-        IMarketItem _itemSelected;
+        MarketCell _cellSelected;
 
         public void Setup(Market market)
         {
@@ -28,7 +33,7 @@ namespace BGS.Market
             GetCells();
             SetupCells();
 
-            _purchaseBtn.OnClick += PurchaseItem;
+            UpdateCoins();
         }
 
         private void GetCells()
@@ -49,24 +54,52 @@ namespace BGS.Market
                 MarketCell cell = _cells[i];
 
                 cell.SetItem(_market.Items[i]);
-                cell.OnSelect += SelectItem;
+                cell.OnSelect += SelectCell;
             }
         }
 
-        public void SelectItem(IMarketItem itemSelected)
+        private void UpdateCoins()
         {
-            _itemSelected = itemSelected;
+            _coins.text = CoinManager.Instance ? CoinManager.Instance.Coins.ToString() : "0";
+        }
 
-            _title.text = _itemSelected.ItemData.Title;
-            _description.text = _itemSelected.ItemData.Description;
-            _price.text = $"Buy ${_itemSelected.Price}";
+        private void UpdateDescription()
+        {
+            IMarketItem item = _cellSelected.GetData();
+
+            _title.text = item.Data.Title;
+            _rarity.text = Enum.GetName(item.Data.Rarity.GetType(), item.Data.Rarity);
+            _description.text = item.Data.Description;
+            _price.text = $"Buy ${item.Price}";
+        }
+
+        private void UpdatePreview()
+        {
+            IMarketItem item = _cellSelected.GetData();
+
+            _previewApparence.UpdateApparence(item.Data.Key, item.Data.Frames);
+        }
+
+        public void SelectCell(MarketCell cellSelected)
+        {
+            _cellSelected = cellSelected;
+
+            UpdateDescription();
+            UpdatePreview();
         }
 
         public void PurchaseItem()
         {
-            if (_itemSelected == null) return;
+            if (_cellSelected == null) return;
 
-            _market.Purchase(_itemSelected);
+            bool purchaseSuccess = _market.Purchase(_cellSelected.GetData());
+
+            if (!purchaseSuccess) return;
+
+            _cellSelected.SetSold();
+            _cellSelected = null;
+
+            UpdateCoins();
         }
     }
 }

@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c9a41a4a87de714fae0fa560e153b9d, type: 3}
   m_Name: MarketItemData
   m_EditorClassIdentifier: 
-  _itemData: {fileID: 11400000, guid: 9a1a4b27b5135a342a59abc1a624266e, type: 2}
+  _itemData: {fileID: 11400000, guid: d8ab2ee2a194019419f407b30261686b, type: 2}
   _price: 100

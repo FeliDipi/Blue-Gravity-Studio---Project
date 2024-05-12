@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BGS.Inventory;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -28,9 +29,13 @@ namespace BGS.Market
             _marketUI.Setup(this);
         }
 
-        public void Purchase(IMarketItem item)
+        public bool Purchase(IMarketItem item)
         {
-            Debug.Log("Item purchased");
+            if (!CoinManager.Instance || !CoinManager.Instance.DiscountCoins(item.Price)) return false;
+
+            InventoryManager.Instance?.AddItem(item.Data);
+
+            return true;
         }
     }
 }

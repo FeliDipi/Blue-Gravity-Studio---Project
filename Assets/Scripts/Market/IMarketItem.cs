@@ -1,11 +1,11 @@
-using BGS.Item;
+using BGS.Apparence;
 
 namespace BGS.Market
 {
     public interface IMarketItem
     {
-        IItem ItemData { get; }
         int Price { get; }
+        IApparence Data { get; }
     }
 }
 

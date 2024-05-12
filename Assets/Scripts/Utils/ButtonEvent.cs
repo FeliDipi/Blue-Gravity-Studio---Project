@@ -1,8 +1,9 @@
 using System;
+using UnityEngine.Events;
 
 public class ButtonEvent : ButtonAnimation
 {
-    public Action OnClick;
+    public UnityEvent OnClick;
 
     public override void Click()
     {

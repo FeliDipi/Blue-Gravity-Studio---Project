@@ -27,6 +27,7 @@ namespace BGS.Inventory
 
         public void UseItem(IApparence selected)
         {
+
         }
     }
 }

@@ -76,7 +76,7 @@ namespace BGS.MarketModule
 
         public IMarketItem GetItem(string id)
         {
-            foreach(IMarketItem item in _items)
+            foreach (IMarketItem item in _items)
             {
                 if (item.Data.Id == id) return item;
             }

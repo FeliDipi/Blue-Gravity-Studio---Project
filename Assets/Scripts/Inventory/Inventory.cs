@@ -10,6 +10,7 @@ namespace BGS.InventoryModule
 
         [Header("Dependencies")]
         [SerializeField] private InventoryUI _inventoryUI;
+
         [SerializeField] private ApparenceManager _playerApparence;
 
         private InventoryData _data = new InventoryData();
@@ -53,7 +54,7 @@ namespace BGS.InventoryModule
 
         public bool IsEquiped(string id)
         {
-            foreach(IApparence itemData in _data.ItemsSelected.Values)
+            foreach (IApparence itemData in _data.ItemsSelected.Values)
             {
                 if (itemData.Id == id) return true;
             }

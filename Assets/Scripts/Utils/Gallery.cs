@@ -1,6 +1,4 @@
-﻿using BGS.Apparence;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Gallery<T> : MonoBehaviour
@@ -44,6 +42,7 @@ public abstract class Gallery<T> : MonoBehaviour
     }
 
     protected abstract void UpdateCells();
+
     protected abstract void UpdateDescription();
 
     public virtual void SelectCell(Cell cellSelected)

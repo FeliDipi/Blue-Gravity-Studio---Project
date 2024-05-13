@@ -1,6 +1,5 @@
 using BGS.Apparence;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BGS.MarketModule
@@ -9,6 +8,7 @@ namespace BGS.MarketModule
     {
         [Header("Market UI Properties")]
         [SerializeField] private ApparenceManager _previewApparence;
+
         [SerializeField] private TMPro.TextMeshProUGUI _price;
 
         private IMarketItem _currentData;
@@ -45,7 +45,7 @@ namespace BGS.MarketModule
         {
             _currentData = _manager.GetItem(cellSelected.GetData());
             UpdatePreview();
-            
+
             base.SelectCell(cellSelected);
         }
 

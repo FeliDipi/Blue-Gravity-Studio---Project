@@ -16,7 +16,7 @@ namespace BGS.Apparence
 
         public void SetFrame(int frame)
         {
-            if (_currentFrames.Count <= 0) return;
+            if (_currentFrames.Count <= 0 || frame < 0 || frame >= _currentFrames.Count) return;
 
             _spr.sprite = _currentFrames[frame];
         }
@@ -27,4 +27,3 @@ namespace BGS.Apparence
         }
     }
 }
-

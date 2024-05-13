@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace BGS.Market
+namespace BGS.MarketModule
 {
     public interface IMarket
     {
@@ -9,4 +9,3 @@ namespace BGS.Market
         public bool Purchase(IMarketItem item);
     }
 }
-

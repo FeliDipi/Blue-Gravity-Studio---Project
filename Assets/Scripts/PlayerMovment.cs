@@ -23,7 +23,7 @@ public class PlayerMovment : MonoBehaviour
         _anim.SetFloat("yMovment", _movmentDirection.y);
     }
 
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         _rb.MovePosition(_rb.position + _movmentDirection.normalized * _speed * Time.fixedDeltaTime);
     }

@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BGS.Market
+namespace BGS.MarketModule
 {
     public class MarketPreview : MonoBehaviour
     {
@@ -17,4 +17,3 @@ namespace BGS.Market
         }
     }
 }
-

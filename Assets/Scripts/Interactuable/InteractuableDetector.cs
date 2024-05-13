@@ -10,6 +10,7 @@ namespace BGS.Interactuable
 
         [Header("Detection Properties")]
         [SerializeField] private float _detectionRadius = 1.5f;
+
         [SerializeField] private CircleCollider2D _cl;
 
         private IInteractuable _currentInteractuable;
@@ -22,7 +23,7 @@ namespace BGS.Interactuable
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 _currentInteractuable?.Interact();
             }
@@ -49,4 +50,3 @@ namespace BGS.Interactuable
         }
     }
 }
-

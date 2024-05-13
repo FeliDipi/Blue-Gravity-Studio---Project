@@ -5,24 +5,25 @@ namespace BGS.Interactuable
 {
     public abstract class InteractuableBase : MonoBehaviour, IInteractuable
     {
-
         public string Info => _info;
 
         [Header("Interactuable Properties")]
         [SerializeField] private string _info = "use";
 
         [Header("Highlight Properties")]
-        [SerializeField] private float _animationTime = 0.2f;
+        [SerializeField] protected float _animationTime = 0.2f;
+
         [SerializeField] private Vector3 _scaleFactor = new Vector3(0.1f, 0.1f, 0.1f);
 
         private Vector3 _originalScale;
 
-        private void Awake()
+        protected void Awake()
         {
             _originalScale = transform.localScale;
         }
 
-        public virtual void Interact() { }
+        public virtual void Interact()
+        { }
 
         public void StartHighlight()
         {
@@ -36,4 +37,3 @@ namespace BGS.Interactuable
         }
     }
 }
-

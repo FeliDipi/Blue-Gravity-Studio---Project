@@ -6,6 +6,7 @@ public abstract class ButtonAnimation : MonoBehaviour, IPointerEnterHandler, IPo
 {
     [Header("Animation Properties")]
     [SerializeField] private float _animationTime = 0.1f;
+
     [SerializeField] private Vector3 _rotationShakeFactor = new Vector3(0, 0, 45);
     [SerializeField] private Vector3 _scaleFactor = new Vector3(-0.1f, -0.1f, -0.1f);
 

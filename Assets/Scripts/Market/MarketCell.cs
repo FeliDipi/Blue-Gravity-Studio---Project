@@ -1,4 +1,4 @@
-using BGS.Market;
+using BGS.MarketModule;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +9,7 @@ public class MarketCell : ButtonAnimation
 
     [Header("Cell Properties")]
     [SerializeField] private Image _icon;
+
     [SerializeField] private Image _sold;
 
     private IMarketItem _marketItem;

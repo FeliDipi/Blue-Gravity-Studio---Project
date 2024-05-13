@@ -1,9 +1,9 @@
 ﻿using BGS.Apparence;
 using UnityEngine;
 
-namespace BGS.Market
+namespace BGS.MarketModule
 {
-    [CreateAssetMenu(fileName = "MarketItemData", menuName = "Items/New Market Data", order = 1)]
+    [CreateAssetMenu(fileName = "MarketItemData", menuName = "Items/New MarketModule Data", order = 1)]
     public class MarketItemSO : ScriptableObject, IMarketItem
     {
         public IApparence Data => _itemData;
@@ -13,4 +13,3 @@ namespace BGS.Market
         [SerializeField] private int _price;
     }
 }
-

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BGS.Market
+namespace BGS.MarketModule
 {
     public class MarketUI : MonoBehaviour
     {
@@ -12,19 +12,20 @@ namespace BGS.Market
 
         [Header("Gallery Properties")]
         [SerializeField] private Transform _grid;
+
         [SerializeField] private Transform _descriptionContent;
 
         [Header("Info Properties")]
         [SerializeField] private TMPro.TextMeshProUGUI _title;
+
         [SerializeField] private TMPro.TextMeshProUGUI _rarity;
         [SerializeField] private TMPro.TextMeshProUGUI _description;
         [SerializeField] private TMPro.TextMeshProUGUI _price;
-        [SerializeField] private TMPro.TextMeshProUGUI _coins;
 
         private List<MarketCell> _cells = new List<MarketCell>();
-        private Market _market;
 
-        MarketCell _cellSelected;
+        private Market _market;
+        private MarketCell _cellSelected;
 
         public void Setup(Market market)
         {
@@ -32,8 +33,6 @@ namespace BGS.Market
 
             GetCells();
             SetupCells();
-
-            UpdateCoins();
         }
 
         private void GetCells()
@@ -47,20 +46,17 @@ namespace BGS.Market
 
         private void SetupCells()
         {
-            if (_market.Items.Count <= 0) return;
-
             for (int i = 0; i < _market.Items.Count; i++)
             {
+                IMarketItem data = _market.Items[i];
+
                 MarketCell cell = _cells[i];
 
-                cell.SetItem(_market.Items[i]);
+                cell.SetItem(data);
                 cell.OnSelect += SelectCell;
-            }
-        }
 
-        private void UpdateCoins()
-        {
-            _coins.text = CoinManager.Instance ? CoinManager.Instance.Coins.ToString() : "0";
+                if (_market.IsSold(data.Data.Id)) cell.SetSold();
+            }
         }
 
         private void UpdateDescription()
@@ -98,9 +94,6 @@ namespace BGS.Market
 
             _cellSelected.SetSold();
             _cellSelected = null;
-
-            UpdateCoins();
         }
     }
 }
-

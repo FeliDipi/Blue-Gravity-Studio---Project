@@ -9,15 +9,18 @@ namespace BGS.Interactuable
 
         public void SetInteraction(IInteractuable interactuable)
         {
+            if (!_interactuableContent) return;
+
             _interactuableContent.SetActive(true);
             _interactuableText.text = interactuable.Info;
         }
 
         public void OutInteraction()
         {
+            if (!_interactuableContent) return;
+
             _interactuableContent.SetActive(false);
             _interactuableText.text = "";
         }
     }
 }
-

@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace BGS.Interactuable
 {
@@ -12,8 +11,7 @@ namespace BGS.Interactuable
         {
             base.Interact();
 
-            SceneManager.LoadScene(_sceneName);
+            Transition.Instance?.FadeIn(_sceneName);
         }
     }
 }
-

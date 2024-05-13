@@ -1,6 +1,6 @@
 using BGS.Apparence;
 
-namespace BGS.Market
+namespace BGS.MarketModule
 {
     public interface IMarketItem
     {
@@ -8,4 +8,3 @@ namespace BGS.Market
         IApparence Data { get; }
     }
 }
-

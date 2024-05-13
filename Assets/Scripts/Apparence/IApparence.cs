@@ -5,6 +5,7 @@ namespace BGS.Apparence
 {
     public interface IApparence
     {
+        public string Id { get; }
         string Title { get; }
         string Description { get; }
         Sprite Icon { get; }
@@ -26,4 +27,3 @@ namespace BGS.Apparence
         EPIC
     }
 }
-

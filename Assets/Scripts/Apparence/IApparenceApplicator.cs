@@ -14,4 +14,3 @@ namespace BGS.Apparence
         public void SetFrames(List<Sprite> frames);
     }
 }
-

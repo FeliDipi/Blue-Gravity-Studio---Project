@@ -55,8 +55,10 @@ namespace BGS.MarketModule
             SaveSystem.Instance.SaveData(typeof(InventoryData), inventory);
         }
 
-        public bool Purchase(IMarketItem item)
+        public bool Purchase(string itemId)
         {
+            IMarketItem item = GetItem(itemId);
+
             if (!CoinManager.Instance || !CoinManager.Instance.DiscountCoins(item.Price)) return false;
 
             _itemsSolds.Add(item.Data.Id);
@@ -70,6 +72,16 @@ namespace BGS.MarketModule
         public bool IsSold(string id)
         {
             return _itemsSolds.Contains(id);
+        }
+
+        public IMarketItem GetItem(string id)
+        {
+            foreach(IMarketItem item in _items)
+            {
+                if (item.Data.Id == id) return item;
+            }
+
+            return null;
         }
     }
 }

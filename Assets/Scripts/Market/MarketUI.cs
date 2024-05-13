@@ -5,94 +5,59 @@ using UnityEngine;
 
 namespace BGS.MarketModule
 {
-    public class MarketUI : MonoBehaviour
+    public class MarketUI : Gallery<Market>
     {
-        [Header("Preview Properties")]
+        [Header("Market UI Properties")]
         [SerializeField] private ApparenceManager _previewApparence;
-
-        [Header("Gallery Properties")]
-        [SerializeField] private Transform _grid;
-
-        [SerializeField] private Transform _descriptionContent;
-
-        [Header("Info Properties")]
-        [SerializeField] private TMPro.TextMeshProUGUI _title;
-
-        [SerializeField] private TMPro.TextMeshProUGUI _rarity;
-        [SerializeField] private TMPro.TextMeshProUGUI _description;
         [SerializeField] private TMPro.TextMeshProUGUI _price;
 
-        private List<MarketCell> _cells = new List<MarketCell>();
+        private IMarketItem _currentData;
 
-        private Market _market;
-        private MarketCell _cellSelected;
-
-        public void Setup(Market market)
+        protected override void UpdateCells()
         {
-            _market = market;
-
-            GetCells();
-            SetupCells();
-        }
-
-        private void GetCells()
-        {
-            foreach (Transform cell in _grid)
+            for (int i = 0; i < _manager.Items.Count; i++)
             {
-                MarketCell marketCell = cell.GetComponent<MarketCell>();
-                _cells.Add(marketCell);
-            }
-        }
+                IMarketItem data = _manager.Items[i];
 
-        private void SetupCells()
-        {
-            for (int i = 0; i < _market.Items.Count; i++)
-            {
-                IMarketItem data = _market.Items[i];
+                Cell cell = _cells[i];
 
-                MarketCell cell = _cells[i];
-
-                cell.SetItem(data);
+                cell.SetItem(data.Data.Id, data.Data.Icon);
                 cell.OnSelect += SelectCell;
 
-                if (_market.IsSold(data.Data.Id)) cell.SetSold();
+                cell.SetUsed(_manager.IsSold(data.Data.Id));
             }
         }
 
-        private void UpdateDescription()
+        protected override void UpdateDescription()
         {
-            IMarketItem item = _cellSelected.GetData();
-
-            _title.text = item.Data.Title;
-            _rarity.text = Enum.GetName(item.Data.Rarity.GetType(), item.Data.Rarity);
-            _description.text = item.Data.Description;
-            _price.text = $"Buy ${item.Price}";
+            _title.text = _currentData.Data.Title;
+            _rarity.text = Enum.GetName(_currentData.Data.Rarity.GetType(), _currentData.Data.Rarity);
+            _description.text = _currentData.Data.Description;
+            _price.text = $"Buy ${_currentData.Price}";
         }
 
         private void UpdatePreview()
         {
-            IMarketItem item = _cellSelected.GetData();
-
-            _previewApparence.UpdateApparence(item.Data.Key, item.Data.Frames);
+            _previewApparence.UpdateApparence(_currentData.Data.Key, _currentData.Data.Frames);
         }
 
-        public void SelectCell(MarketCell cellSelected)
+        public override void SelectCell(Cell cellSelected)
         {
-            _cellSelected = cellSelected;
-
-            UpdateDescription();
+            _currentData = _manager.GetItem(cellSelected.GetData());
             UpdatePreview();
+            
+            base.SelectCell(cellSelected);
         }
 
         public void PurchaseItem()
         {
             if (_cellSelected == null) return;
 
-            bool purchaseSuccess = _market.Purchase(_cellSelected.GetData());
+            bool purchaseSuccess = _manager.Purchase(_cellSelected.GetData());
 
             if (!purchaseSuccess) return;
 
-            _cellSelected.SetSold();
+            _cellSelected.SetUsed(true);
             _cellSelected = null;
         }
     }

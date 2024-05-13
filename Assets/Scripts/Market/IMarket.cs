@@ -6,6 +6,6 @@ namespace BGS.MarketModule
     {
         List<IMarketItem> Items { get; }
 
-        public bool Purchase(IMarketItem item);
+        public bool Purchase(string itemId);
     }
 }
